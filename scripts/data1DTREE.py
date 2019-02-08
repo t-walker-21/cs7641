@@ -1,40 +1,33 @@
 import cv2
-from sklearn.datasets import fetch_mldata
+from cleanData import Dataset1
 from sklearn import tree
 from sklearn.cross_validation import train_test_split
 import numpy as np
 
-mnist = fetch_mldata('MNIST original')
 
-x = []
-y = []
- 
-for i in range(0,len(mnist.target)):
+data = Dataset1()
 
- x.append(mnist.data[i])
- y.append(int(mnist.target[i]))
+x,y = data.fetch_data()
+
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=8)
 
 
-
-x = np.asarray(x)
-y = np.asarray(y)
-
-
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.75, random_state=42)
+print len(X_train)
+print len(y_train)
 
 
-x = np.asarray(x)
-y = np.asarray(y)
+cls = tree.DecisionTreeClassifier(max_depth=1)
 
-cls = tree.DecisionTreeClassifier()
+cls.fit(X_train,y_train)
+tree.export_graphviz(cls,out_file='tree.dot')
 
-cls.fit(x,y)
+inf = cls.predict(X_test)
+gt = y_test.ravel()
 
+correct = 0
 
-for t in range(0,len(y_test)):
- guess = []
- guess.append(X_test[t])
- guess = np.asarray(guess)
+for t in range(len(gt)):
+    if inf[t] == gt[t]:
+        correct += 1
 
- cv2.imshow(str(cls.predict(guess)[0]),X_test[t].reshape(28,28))
- cv2.waitKey(700)
+print correct / (len(gt) * 1.0)
