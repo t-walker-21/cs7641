@@ -7,7 +7,7 @@ import numpy as np
 
 data = Dataset1()
 
-x,y = data.fetch_data()
+x,y = data.fetch_data_multi()
 
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=8)
 
@@ -16,7 +16,7 @@ print len(X_train)
 print len(y_train)
 
 
-cls = tree.DecisionTreeClassifier(max_depth=1)
+cls = tree.DecisionTreeClassifier(max_depth=30)
 
 cls.fit(X_train,y_train)
 tree.export_graphviz(cls,out_file='tree.dot')

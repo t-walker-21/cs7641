@@ -6,7 +6,7 @@ from cleanData import Dataset1
 
 data = Dataset1()
 
-x,y = data.fetch_data()
+x,y = data.fetch_data_multi()
 
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=20)
 

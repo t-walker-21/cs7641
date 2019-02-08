@@ -8,16 +8,16 @@ import time
 
 data = Dataset1()
 
-x,y = data.fetch_data()
+x,y = data.fetch_data_multi()
 
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=5)
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=5)
 
 
 print len(X_train)
 print len(y_train)
 
 
-cls = KNeighborsClassifier(n_neighbors=1)
+cls = KNeighborsClassifier(n_neighbors=55)
 
 cls.fit(X_train,y_train)
 
@@ -33,7 +33,7 @@ for t in range(len(gt)):
 
 print correct / (len(gt) * 1.0)
 
-"""mat = confusion_matrix(cls.predict(X_test),y_test)
+mat = confusion_matrix(cls.predict(X_test),y_test)
 
 
 print(mat)
@@ -44,4 +44,4 @@ plt.title('Confusion matrix')
 plt.colorbar()
 plt.ylabel('True label')
 plt.xlabel('Predicted label')
-plt.show()"""
+plt.show()
