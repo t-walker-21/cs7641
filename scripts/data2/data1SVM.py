@@ -17,7 +17,7 @@ print len(y_train)
 #print y_train
 
 
-cls = svm.SVC(kernel='linear',C=60)
+cls = svm.SVC(kernel='linear')
 #cls = svm.SVC(kernel='rbf')
 #cls = svm.SVC(kernel='poly')
 print ("TRAINING MODEL")

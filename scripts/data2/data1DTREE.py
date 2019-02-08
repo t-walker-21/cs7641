@@ -17,7 +17,7 @@ print len(X_train)
 print len(y_train)
 
 
-cls = tree.DecisionTreeClassifier()
+cls = tree.DecisionTreeClassifier(max_depth=4)
 
 cls.fit(X_train,y_train)
 tree.export_graphviz(cls,out_file='tree.dot')

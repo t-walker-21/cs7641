@@ -27,7 +27,7 @@ def get_highest(l):
 
 
 INIT_LR = 1E-5
-EPOCHS = 22
+EPOCHS = 25
 BS = 50
 
 data = Dataset2()
@@ -50,7 +50,7 @@ print len(y_train)
 
 cls = Sequential()
 
-cls.add(Dense(50,input_dim=SIZE,activation='relu'))
+cls.add(Dense(100,input_dim=SIZE,activation='relu'))
 
 cls.add(Dense(len(y_train[0]),activation='softmax',kernel_initializer='random_uniform'))
 

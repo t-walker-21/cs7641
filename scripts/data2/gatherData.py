@@ -2,7 +2,7 @@ import csv
 from sklearn import preprocessing
 import numpy as np
 THRESHOLD = 0.72
-LIMCOUNT = 150
+LIMCOUNT = 200
 import cv2
 import os
 from keras.applications import vgg16
