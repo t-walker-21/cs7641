@@ -10,17 +10,17 @@ data = Dataset1()
 
 x,y = data.fetch_data_multi()
 
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.6, random_state=412)
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.1, random_state=412)
 
 
 print len(X_train)
 print len(y_train)
 
 
-cls = KNeighborsClassifier(n_neighbors=4,metric="manhattan")
-#cls = KNeighborsClassifier(n_neighbors=4)
+#cls = KNeighborsClassifier(n_neighbors=1,metric="manhattan")
+cls = KNeighborsClassifier(n_neighbors=2,metric="manhattan")
 
-cls.fit(X_train,y_train)
+cls.fit(X_train,y_train.ravel())
 
 
 inf = cls.predict(X_test)
@@ -34,10 +34,10 @@ for t in range(len(gt)):
 
 print correct / (len(gt) * 1.0)
 
-mat = confusion_matrix(cls.predict(X_test),y_test)
+#mat = confusion_matrix(cls.predict(X_test),y_test)
 
 
-print(mat)
+#print(mat)
 
 """
 plt.matshow(mat)

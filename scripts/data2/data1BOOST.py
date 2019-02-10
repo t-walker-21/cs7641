@@ -3,12 +3,14 @@ from sklearn.model_selection import train_test_split
 from sklearn import tree
 import numpy as np
 from gatherData import Dataset2
+import sys
 
 data = Dataset2()
 
-x,y = data.fetch_data()
+dataSize = int(sys.argv[1])
+x,y = data.fetch_data(dataSize)
 
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.5, random_state=20)
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.1, random_state=20)
 
 
 print len(X_train)

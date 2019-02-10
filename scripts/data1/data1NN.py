@@ -27,14 +27,17 @@ def get_highest(l):
 
 
 INIT_LR = 1E-3
-EPOCHS = 2000
+EPOCHS = 900
 BS = 50
+seed = 9068
+
+np.random.seed(seed)
 
 data = Dataset1()
 
 x,y = data.fetch_data_multi()
 
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=9)
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=seed)
 print y_train[3]
 y_train = to_categorical(y_train)
 y_test = to_categorical(y_test)
@@ -50,12 +53,7 @@ print y_train[1]
 cls = Sequential()
 
 cls.add(Dense(7,input_dim=7,activation='relu',kernel_initializer='random_uniform'))
-cls.add(Dense(20,activation='relu',kernel_initializer='random_uniform'))
-cls.add(Dense(20,activation='relu',kernel_initializer='random_uniform'))
-cls.add(Dense(20,activation='relu',kernel_initializer='random_uniform'))
-cls.add(Dense(20,activation='relu',kernel_initializer='random_uniform'))
-cls.add(Dense(20,activation='relu',kernel_initializer='random_uniform'))
-cls.add(Dense(20,activation='relu',kernel_initializer='random_uniform'))
+cls.add(Dense(100,activation='relu',kernel_initializer='random_uniform'))
 cls.add(Dense(3,activation='softmax',kernel_initializer='random_uniform'))
 
 opt = Adam(lr=INIT_LR)
@@ -69,12 +67,12 @@ cls.compile(loss="categorical_crossentropy", optimizer=opt,
 
 print ("TRAINING MODEL")
 
-history = cls.fit(X_train,y_train,epochs=EPOCHS,steps_per_epoch=10,validation_split=0.2,validation_steps=10)
+history = cls.fit(X_train,y_train,epochs=EPOCHS,steps_per_epoch=10,validation_split=0.2,validation_steps=50)
 
-plt.plot(history.history['acc'])
-plt.plot(history.history['val_acc'])
-plt.title('model accuracy')
-plt.ylabel('accuracy')
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('model loss')
+plt.ylabel('loss')
 plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='upper left')
 plt.show()

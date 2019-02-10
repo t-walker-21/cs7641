@@ -2,11 +2,11 @@ import csv
 from sklearn import preprocessing
 import numpy as np
 THRESHOLD = 0.72
-LIMCOUNT = 200
+LIMCOUNT = 200000
 import cv2
 import os
-from keras.applications import vgg16
-from keras import backend as K
+
+
 class Dataset2:
     def __init__(self):
         pass
@@ -14,7 +14,9 @@ class Dataset2:
 
 
 
-    def fetch_data(self):
+    def fetch_data_and_proc(self):
+        from keras.applications import vgg16
+        from keras import backend as K
 
         mod = vgg16.VGG16(include_top=False,weights="imagenet")
         count = 0
@@ -55,4 +57,18 @@ class Dataset2:
         print "done loading data"
         del mod
         K.clear_session()
+        np.save("data.npy",X)
+        np.save("labels.npy",Y)
+        return X,Y
+
+    def fetch_data(self,numItems):
+        if numItems == 0:
+            X = np.load('data.npy')
+            Y = np.load('labels.npy')
+            return X,Y
+
+        fnameD = "data" + str(numItems) + ".npy"
+        fnameL = "labels" + str(numItems) + ".npy"
+        X = np.load(fnameD)
+        Y = np.load(fnameL)
         return X,Y

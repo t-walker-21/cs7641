@@ -5,12 +5,14 @@ import matplotlib.pyplot as plt
 from gatherData import Dataset2
 import numpy as np
 import time
+import sys
 
 data = Dataset2()
 
-x,y = data.fetch_data()
+dataSize = int(sys.argv[1])
+x,y = data.fetch_data(dataSize)
 
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.8, random_state=412)
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.1, random_state=412)
 
 
 print len(X_train)
@@ -34,10 +36,10 @@ for t in range(len(gt)):
 
 print correct / (len(gt) * 1.0)
 
-mat = confusion_matrix(cls.predict(X_test),y_test)
+#mat = confusion_matrix(cls.predict(X_test),y_test)
 
 
-print(mat)
+#print(mat)
 
 """
 plt.matshow(mat)

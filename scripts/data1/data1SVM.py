@@ -8,7 +8,7 @@ data = Dataset1()
 
 x,y = data.fetch_data_multi()
 
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=20)
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.1, random_state=20)
 
 
 print len(X_train)
@@ -16,9 +16,9 @@ print len(y_train)
 #print y_train
 
 
-cls = svm.SVC(kernel='linear',C=60)
-#cls = svm.SVC(kernel='rbf')
-#cls = svm.SVC(kernel='poly')
+cls = svm.SVC(kernel='linear')
+cls = svm.SVC(kernel='rbf')
+cls = svm.SVC(kernel='poly',C=1)
 print ("TRAINING MODEL")
 cls.fit(X_train,y_train.ravel())
 

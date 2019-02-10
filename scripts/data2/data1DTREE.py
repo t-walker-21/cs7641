@@ -3,21 +3,22 @@ from gatherData import Dataset2
 from sklearn import tree
 from sklearn.model_selection import train_test_split
 import numpy as np
+import sys
 
 
 data = Dataset2()
-
-x,y = data.fetch_data()
+dataSize = int(sys.argv[1])
+x,y = data.fetch_data(dataSize)
 del data
 
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=60)
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.1, random_state=60)
 
 
 print len(X_train)
 print len(y_train)
 
 
-cls = tree.DecisionTreeClassifier(max_depth=4)
+cls = tree.DecisionTreeClassifier()
 
 cls.fit(X_train,y_train)
 tree.export_graphviz(cls,out_file='tree.dot')

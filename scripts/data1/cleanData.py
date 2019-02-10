@@ -14,7 +14,7 @@ class Dataset1:
     def fetch_data_bin(self):
         X = []
         Y = []
-        with open('../datasets/raw_data/data1.csv') as csvfile:
+        with open('../../datasets/raw_data/data1.csv') as csvfile:
             datareader = csv.reader(csvfile)
 
             for row in datareader:
@@ -41,7 +41,7 @@ class Dataset1:
     def fetch_data_multi(self):
         X = []
         Y = []
-        with open('../datasets/raw_data/data1.csv') as csvfile:
+        with open('../../datasets/raw_data/data1.csv') as csvfile:
             datareader = csv.reader(csvfile)
 
             for row in datareader:
