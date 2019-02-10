@@ -1,34 +1,18 @@
-from cleanData import Dataset1
+from gatherData import Dataset2
 from sklearn import svm
 from sklearn.model_selection import train_test_split, cross_val_score, ShuffleSplit
 import numpy as np
 from matplotlib import pyplot as plt
+import sys
 
-data = Dataset1()
+data = Dataset2()
 
-x,y = data.fetch_data_multi()
+dataSize = int(sys.argv[1])
+x,y = data.fetch_data(dataSize)
+del data
 
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=1)
-
-
-print len(X_train)
-print len(y_train)
-
-from cleanData import Dataset1
-from sklearn import tree
-from sklearn.model_selection import train_test_split, cross_val_score, ShuffleSplit
-import numpy as np
-from matplotlib import pyplot as plt
-
-data = Dataset1()
-
-x,y = data.fetch_data_multi()
-
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=1)
-
-
-print len(X_train)
-print len(y_train)
+print len(x)
+print len(y)
 
 size_perf_train = []
 size_perf_test = []
@@ -38,11 +22,12 @@ maxTrnIdx = 0
 maxTstAcc = 0
 maxTstIdx = 0
 
-for data_size in range(1,100):
+for data_size in range(1,10):
         cls = svm.SVC(kernel='linear')
-        size = 1 - (data_size * 0.01)
+        size = 1 - (data_size * 0.1)
         print "test size: " , size
         X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=size, random_state=58891)
+        print len(X_train) , " training samples"
         cls.fit(X_train,y_train)
 
         testPred = cls.predict(X_test)

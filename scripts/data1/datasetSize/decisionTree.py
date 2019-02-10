@@ -14,18 +14,61 @@ X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_
 print len(X_train)
 print len(y_train)
 
+size_perf_train = []
+size_perf_test = []
 
-size_perf = []
-for data_size in np.arange(1,10,1):
+maxTrnAcc = 0
+maxTrnIdx = 0
+maxTstAcc = 0
+maxTstIdx = 0
+
+for data_size in range(1,100):
         cls = tree.DecisionTreeClassifier(max_depth=2)
-        size = (data_size) * 0.1
-        print "size: " , 1-size
-        cv = ShuffleSplit(n_splits=1, test_size=(1-size),random_state=0)
-        score = cross_val_score(cls,x,y,cv=cv)
-        #print np.mean(cross_val_score(cls,x,y,cv=cv))
-        size_perf.append(np.mean(score))
+        size = 1 - (data_size * 0.01)
+        print "test size: " , size
+        X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=size, random_state=21)
+        cls.fit(X_train,y_train)
 
-plt.plot(size_perf)
+        testPred = cls.predict(X_test)
+        gt = y_test.ravel()
+
+        correct = 0
+
+        for t in range(len(gt)):
+                if testPred[t] == gt[t]:
+                        correct += 1
+
+        accTest = correct / (len(gt) * 1.0)
+        if accTest > maxTstAcc:
+                maxTstAcc = accTest
+                maxTstIdx = data_size-1
+
+        print "test performance  ",accTest
+
+
+        trainPred = cls.predict(X_train)
+        gt = y_train.ravel()
+
+        correct = 0
+
+        for t in range(len(gt)):
+                if trainPred[t] == gt[t]:
+                        correct += 1
+
+        accTrain = correct / (len(gt) * 1.0)
+        if accTrain > maxTrnAcc:
+                maxTrnAcc = accTrain
+                maxTrnIdx = data_size-1
+        print "Train performance  ",accTrain
+        #print np.mean(cross_val_score(cls,x,y,cv=cv))
+        size_perf_train.append(accTrain)
+        size_perf_test.append(accTest)
+
+plt.plot(size_perf_train,label='Train')
+plt.plot(size_perf_test,label='Test')
+
+plt.plot([maxTrnIdx,maxTstIdx],[maxTrnAcc,maxTstAcc],'r+')
+plt.legend(loc='upper right')
 plt.title('Accuracy vs Data Train Size')
 plt.xlabel('Data Size (percent)')
 plt.ylabel('Accuracy')

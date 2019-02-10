@@ -21,6 +21,7 @@ print len(y_train)
 cls = KNeighborsClassifier(n_neighbors=1,metric="manhattan")
 
 neighbor_perf = []
+neighbor_perf_man = []
 for neigh in range (1,30):
         cls = KNeighborsClassifier(n_neighbors=neigh,metric="manhattan")
         cls2 = KNeighborsClassifier(n_neighbors=neigh)
@@ -29,11 +30,14 @@ for neigh in range (1,30):
         score = np.mean(cross_val_score(cls,x,y,cv=cv))
         score2 = np.mean(cross_val_score(cls2,x,y,cv=cv))
         #print np.mean(cross_val_score(cls,x,y,cv=cv))
-        neighbor_perf.append([score,score2])
+        neighbor_perf.append(score2)
+        neighbor_perf_man.append(score)
 
-plt.plot(neighbor_perf)
+plt.plot(neighbor_perf,label='euclidean')
+plt.plot(neighbor_perf_man,label='manhattan')
 plt.title('10-fold Cross-Validated Accuracy vs Neighbor Number')
 plt.xlabel('Number of Neighbors')
+plt.legend(loc='upper right')
 plt.ylabel('Accuracy')
 plt.show()
 

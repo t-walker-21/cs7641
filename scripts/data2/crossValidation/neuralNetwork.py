@@ -6,11 +6,12 @@ from keras.layers import Dense, Dropout, Flatten
 from keras.optimizers import Adam, SGD
 from sklearn.model_selection import train_test_split
 from sklearn import svm
-from cleanData import Dataset1
+from gatherData import Dataset2
 from sklearn.metrics import confusion_matrix
 from keras.utils import to_categorical
 from matplotlib import pyplot as plt
-
+import sys
+SIZE = 7*7*512
 
 def get_highest(l):
 	high = max(l)
@@ -26,19 +27,21 @@ def get_highest(l):
 	
 
 
-INIT_LR = 1E-3
-EPOCHS = 120
-BS = 50
-seed = 9068
-
+INIT_LR = 1E-4
+EPOCHS = 10
+BS = 600
+seed = 1234
 np.random.seed(seed)
 
-data = Dataset1()
-
-x,y = data.fetch_data_multi()
-
+data = Dataset2()
+dataSize = int(sys.argv[1])
+x,y = data.fetch_data(dataSize)
+#x,y = data.fetch_data_and_proc()
+print "in train func"
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=seed)
-print y_train[3]
+
+
+
 y_train = to_categorical(y_train)
 y_test = to_categorical(y_test)
 
@@ -47,14 +50,13 @@ y_test = to_categorical(y_test)
 print len(X_train)
 print len(y_train)
 
-print y_train[1]
 
 
 cls = Sequential()
 
-cls.add(Dense(7,input_dim=7,activation='relu',kernel_initializer='random_uniform'))
-cls.add(Dense(100,activation='relu',kernel_initializer='random_uniform'))
-cls.add(Dense(3,activation='softmax',kernel_initializer='random_uniform'))
+cls.add(Dense(100,input_dim=SIZE,activation='relu'))
+
+cls.add(Dense(len(y_train[0]),activation='softmax',kernel_initializer='random_uniform'))
 
 opt = Adam(lr=INIT_LR)
 
@@ -67,7 +69,7 @@ cls.compile(loss="categorical_crossentropy", optimizer=opt,
 
 print ("TRAINING MODEL")
 
-history = cls.fit(X_train,y_train,epochs=EPOCHS,steps_per_epoch=10,validation_split=0.2,validation_steps=50)
+history = cls.fit(X_train,y_train,epochs=EPOCHS,steps_per_epoch=5,validation_split=0.2,validation_steps=5)
 
 plt.plot(history.history['loss'])
 plt.plot(history.history['val_loss'])
@@ -80,6 +82,8 @@ plt.show()
 
 inf = cls.predict(X_test)
 gt = y_test
+
+
 
 correct = 0
 
