@@ -2,7 +2,7 @@ import csv
 from sklearn import preprocessing
 import numpy as np
 THRESHOLD = 0.72
-LIMCOUNT = 200000
+LIMCOUNT = 20
 import cv2
 import os
 
