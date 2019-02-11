@@ -63,8 +63,8 @@ class Dataset2:
         del mod
         K.clear_session()
         if (LIMCOUNT == 0):
-            np.save('../data.npy',X)
-            np.save('../labels.npy',Y)
+            np.save('data.npy',X)
+            np.save('labels.npy',Y)
         
         else:
             np.save("data"+str(LIMCOUNT)+".npy",X)
