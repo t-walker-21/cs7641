@@ -71,7 +71,7 @@ plt.plot(size_perf_test,label='Test')
 plt.plot([maxTrnIdx,maxTstIdx],[maxTrnAcc,maxTstAcc],'r+')
 plt.legend(loc='upper right')
 plt.title('Accuracy vs Data Train Size')
-plt.xlabel('Data Size (percent)')
+plt.xlabel('Data Size (10s of percent)')
 plt.ylabel('Accuracy')
 plt.show()
 

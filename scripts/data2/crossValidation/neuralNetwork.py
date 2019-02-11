@@ -11,7 +11,7 @@ from sklearn.metrics import confusion_matrix
 from keras.utils import to_categorical
 from matplotlib import pyplot as plt
 import sys
-SIZE = 7*7*512
+SIZE = 3*3*512
 
 def get_highest(l):
 	high = max(l)
@@ -28,7 +28,7 @@ def get_highest(l):
 
 
 INIT_LR = 1E-4
-EPOCHS = 10
+EPOCHS = 30
 BS = 600
 seed = 1234
 np.random.seed(seed)
@@ -38,7 +38,7 @@ dataSize = int(sys.argv[1])
 x,y = data.fetch_data(dataSize)
 #x,y = data.fetch_data_and_proc()
 print "in train func"
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=seed)
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.1, random_state=seed)
 
 
 

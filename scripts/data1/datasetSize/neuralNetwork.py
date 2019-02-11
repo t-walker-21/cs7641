@@ -26,8 +26,8 @@ def get_highest(l):
 	
 
 
-INIT_LR = 1E-3
-EPOCHS = 300
+INIT_LR = 5E-4
+EPOCHS = 500
 BS = 50
 seed = 9068
 
@@ -52,12 +52,12 @@ maxTrnIdx = 0
 maxTstAcc = 0
 maxTstIdx = 0
 
-for data_size in range(1,100):
+for data_size in range(1,10):
 
 
 	size = 1 - (data_size * 0.1)
 	print "test size: " , size
-	X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=size, random_state=541211)
+	X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=size, random_state=5)
 
 	y_train = to_categorical(y_train)
 	y_test = to_categorical(y_test)
@@ -65,7 +65,7 @@ for data_size in range(1,100):
 	cls = Sequential()
 
 	cls.add(Dense(7,input_dim=7,activation='relu',kernel_initializer='random_uniform'))
-	cls.add(Dense(100,activation='relu',kernel_initializer='random_uniform'))
+	cls.add(Dense(30,activation='relu',kernel_initializer='random_uniform'))
 	cls.add(Dense(3,activation='softmax',kernel_initializer='random_uniform'))
 
 	opt = Adam(lr=INIT_LR)
@@ -126,7 +126,7 @@ plt.plot(size_perf_test,label='Test')
 plt.plot([maxTrnIdx,maxTstIdx],[maxTrnAcc,maxTstAcc],'r+')
 plt.legend(loc='upper right')
 plt.title('Accuracy vs Data Train Size')
-plt.xlabel('Data Size (percent)')
+plt.xlabel('Data Size (10s of percent)')
 plt.ylabel('Accuracy')
 #plt.xlim(1,9)
 plt.show()

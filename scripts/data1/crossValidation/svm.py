@@ -28,7 +28,7 @@ print np.mean(score), np.std(score), "linear"
 
 #cls = svm.SVC(kernel='linear')
 #cls = svm.SVC(kernel='rbf')
-cls = svm.SVC(kernel='poly',C=1)
+cls = svm.SVC(kernel='poly')
 
 cv = ShuffleSplit(n_splits=splits, test_size=tst_size,random_state=0)
 #print cross_val_score(cls,x,y,cv=cv)

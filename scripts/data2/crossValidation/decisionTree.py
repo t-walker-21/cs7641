@@ -21,7 +21,7 @@ maxTrnAcc = 0
 maxTrnIdx = 0
 depth_perf_train = []
 depth_perf_test = []
-for depth in range (1,50):
+for depth in range (1,85):
         cls = tree.DecisionTreeClassifier(max_depth=depth)
         cls.fit(X_train,y_train)
         print "\nDepth: " , depth

@@ -14,14 +14,14 @@ del data
 print len(x)
 print len(y)
 
-splits = 1
+splits = 1 #cross validation with only one split == held out validation set
 tst_size = 0.1
 
 cls = svm.SVC(kernel='linear')
 #cls = svm.SVC(kernel='rbf')
 #cls = svm.SVC(kernel='poly',C=1)
 
-cv = ShuffleSplit(n_splits=splits, test_size=tst_size,random_state=0)
+cv = ShuffleSplit(n_splits=splits, test_size=tst_size,random_state=0) 
 #print cross_val_score(cls,x,y,cv=cv)
 score = cross_val_score(cls,x,y,cv=cv)
 print np.mean(score), np.std(score), "linear"

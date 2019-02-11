@@ -67,8 +67,8 @@ class Dataset2:
             Y = np.load('labels.npy')
             return X,Y
 
-        fnameD = "data" + str(numItems) + ".npy"
-        fnameL = "labels" + str(numItems) + ".npy"
+        fnameD = "../data" + str(numItems) + ".npy"
+        fnameL = "../labels" + str(numItems) + ".npy"
         X = np.load(fnameD)
         Y = np.load(fnameL)
         return X,Y

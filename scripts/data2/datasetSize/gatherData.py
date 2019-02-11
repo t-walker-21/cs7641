@@ -63,12 +63,12 @@ class Dataset2:
 
     def fetch_data(self,numItems):
         if numItems == 0:
-            X = np.load('data.npy')
-            Y = np.load('labels.npy')
+            X = np.load('../data.npy')
+            Y = np.load('../labels.npy')
             return X,Y
 
-        fnameD = "data" + str(numItems) + ".npy"
-        fnameL = "labels" + str(numItems) + ".npy"
+        fnameD = "../data" + str(numItems) + ".npy"
+        fnameL = "../labels" + str(numItems) + ".npy"
         X = np.load(fnameD)
         Y = np.load(fnameL)
         return X,Y

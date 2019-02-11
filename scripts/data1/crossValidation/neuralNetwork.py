@@ -26,8 +26,8 @@ def get_highest(l):
 	
 
 
-INIT_LR = 1E-3
-EPOCHS = 120
+INIT_LR = 5E-4
+EPOCHS = 1500
 BS = 50
 seed = 9068
 
@@ -53,7 +53,7 @@ print y_train[1]
 cls = Sequential()
 
 cls.add(Dense(7,input_dim=7,activation='relu',kernel_initializer='random_uniform'))
-cls.add(Dense(100,activation='relu',kernel_initializer='random_uniform'))
+cls.add(Dense(30,activation='relu',kernel_initializer='random_uniform'))
 cls.add(Dense(3,activation='softmax',kernel_initializer='random_uniform'))
 
 opt = Adam(lr=INIT_LR)

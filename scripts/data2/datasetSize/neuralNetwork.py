@@ -11,7 +11,7 @@ from sklearn.metrics import confusion_matrix
 from keras.utils import to_categorical
 from matplotlib import pyplot as plt
 import sys
-SIZE = 7*7*512
+SIZE = 3*3*512
 
 def get_highest(l):
 	high = max(l)
@@ -27,9 +27,9 @@ def get_highest(l):
 	
 
 
-INIT_LR = 1E-3
-EPOCHS = 3
-BS = 50
+INIT_LR = 1E-4
+EPOCHS = 30
+BS = 600
 seed = 9068
 
 np.random.seed(seed)
@@ -49,10 +49,10 @@ maxTrnIdx = 0
 maxTstAcc = 0
 maxTstIdx = 0
 
-for data_size in range(1,100):
+for data_size in range(1,10):
 
 
-	size = 1 - (data_size * 0.01)
+	size = 1 - (data_size * 0.1)
 	print "test size: " , size
 	X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=size, random_state=541211)
 
@@ -62,7 +62,6 @@ for data_size in range(1,100):
 	cls = Sequential()
 
 	cls.add(Dense(100,input_dim=SIZE,activation='relu',kernel_initializer='random_uniform'))
-	cls.add(Dense(100,activation='relu',kernel_initializer='random_uniform'))
 	cls.add(Dense(len(y_train[0]),activation='softmax',kernel_initializer='random_uniform'))
 
 	opt = Adam(lr=INIT_LR)
@@ -123,7 +122,7 @@ plt.plot(size_perf_test,label='Test')
 plt.plot([maxTrnIdx,maxTstIdx],[maxTrnAcc,maxTstAcc],'r+')
 plt.legend(loc='upper right')
 plt.title('Accuracy vs Data Train Size')
-plt.xlabel('Data Size (percent)')
+plt.xlabel('Data Size (10s of percent)')
 plt.ylabel('Accuracy')
 #plt.xlim(1,9)
 plt.show()

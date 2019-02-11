@@ -14,6 +14,7 @@ del data
 
 print len(x)
 print len(y)
+#exit()
 
 size_perf_train = []
 size_perf_test = []
@@ -24,7 +25,7 @@ maxTstAcc = 0
 maxTstIdx = 0
 
 for data_size in range(1,10):
-        cls = tree.DecisionTreeClassifier(max_depth=15)
+        cls = tree.DecisionTreeClassifier(max_depth=79)
         size = 1 - (data_size * 0.1)
         print "test size: " , size
         X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=size, random_state=21)
@@ -72,7 +73,7 @@ plt.plot(size_perf_test,label='Test')
 plt.plot([maxTrnIdx,maxTstIdx],[maxTrnAcc,maxTstAcc],'r+')
 plt.legend(loc='upper right')
 plt.title('Accuracy vs Data Train Size')
-plt.xlabel('Data Size (percent)')
+plt.xlabel('Data Size (10s of percent)')
 plt.ylabel('Accuracy')
 plt.show()
 

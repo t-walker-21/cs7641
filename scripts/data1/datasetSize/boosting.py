@@ -26,7 +26,7 @@ maxTstAcc = 0
 maxTstIdx = 0
 
 for data_size in range(1,100):
-        cls = AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=2),n_estimators=60)
+        cls = AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=2),n_estimators=1)
         size = 1 - (data_size * 0.01)
         print "test size: " , size
         X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=size, random_state=541211)
