@@ -16,6 +16,8 @@ class Dataset2:
     def fetch_data_and_proc(self,LIMCOUNT):
         from keras.applications import vgg16
         from keras import backend as K
+	if LIMCOUNT == 0:
+	 LIMCOUNT = 800000
 
         mod = vgg16.VGG16(include_top=False,weights="imagenet")
         count = 0
@@ -28,7 +30,7 @@ class Dataset2:
             for fin in os.listdir(path+fold):
                     
                     im = cv2.imread(path+fold+"/"+fin)
-                    im = cv2.resize(im,(224,224))
+                    #im = cv2.resize(im,(224,224))
                     #cv2.imshow('pic',im)
                     #cv2.waitKey(10)
                     dat = []
@@ -52,6 +54,10 @@ class Dataset2:
 
         X = np.array(X)
         Y = np.array(Y)
+
+	if LIMCOUNT == 800000:
+	 LIMCOUNT = 0
+	
     
         print "done loading data"
         del mod
@@ -61,8 +67,8 @@ class Dataset2:
             Y = np.load('../labels.npy')
         
         else:
-            np.save("../data"+str(LIMCOUNT)+".npy",X)
-            np.save("../labels"+str(LIMCOUNT)+".npy",Y)
+            np.save("data"+str(LIMCOUNT)+".npy",X)
+            np.save("labels"+str(LIMCOUNT)+".npy",Y)
         return X,Y
 
     def fetch_data(self,numItems):
