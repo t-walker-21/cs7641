@@ -3,6 +3,7 @@ import numpy as np
 import itertools
 import matplotlib.pyplot as plt
 from sklearn.datasets import load_wine
+from sklearn.metrics import silhouette_score
 
 def plot_bic(X):
 
@@ -36,7 +37,7 @@ def plot_bic(X):
                             width=.2, color=color))
     plt.xticks(n_components_range)
     plt.ylim([bic.min() * 1.01 - .01 * bic.max(), bic.max()])
-    plt.title('BIC score per model')
+    plt.title('BIC score per model Wine Quality')
     xpos = np.mod(bic.argmin(), len(n_components_range)) + .65 +\
         .2 * np.floor(bic.argmin() / len(n_components_range))
     plt.text(xpos, bic.min() * 0.97 + .03 * bic.max(), '*', fontsize=14)

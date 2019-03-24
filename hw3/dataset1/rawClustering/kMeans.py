@@ -1,6 +1,6 @@
 from sklearn.cluster import KMeans
 import numpy as np
-from sklearn import metrics
+from sklearn.metrics import silhouette_score
 from scipy.spatial.distance import cdist
 import matplotlib.pyplot as plt
 
@@ -17,12 +17,12 @@ def plot_elbow(X):
     plt.plot(K, distortions, 'bx-')
     plt.xlabel('k')
     plt.ylabel('Distortion')
-    plt.title('The Elbow Method showing the optimal k')
+    plt.title('KMeans Elbow on Grad Admissions Data')
     plt.show()
 
 
 
-fin = open("data1.txt","r")
+fin = open("../data1.txt","r")
 
 
 X = []
@@ -35,26 +35,18 @@ for l in fin:
 X = np.array(X,dtype=np.float32)
 
 #obtain elbow plot
-#plot_elbow(X)
+plot_elbow(X)
 
 #pick three clusters, and view a few groupings
 
-km = KMeans(n_clusters=3,random_state=0).fit(X)
+km = KMeans(n_clusters=2,random_state=10).fit(X)
+labels = km.predict(X)
 
-cent0 = km.cluster_centers_[0]
-cent1 = km.cluster_centers_[1]
-cent2 = km.cluster_centers_[2]
+print silhouette_score(X,labels)
 
-centGroups = [[],[],[]]
+#show some results of each cluster
+print "cluster 1"
+print X[np.where(labels == 1)][:5]
 
-
-for pt in X:
-    #print pt
-    distances = []
-    distances.append(np.linalg.norm(cent0-pt))
-    distances.append(np.linalg.norm(cent1-pt))
-    distances.append(np.linalg.norm(cent2-pt))
-    closest = np.argmin(np.array(distances))
-    centGroups[closest].append(pt)
-
-print centGroups[2]
+print "cluster 2"
+print X[np.where(labels == 0)][:5]

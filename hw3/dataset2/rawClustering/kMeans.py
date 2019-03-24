@@ -4,6 +4,7 @@ from sklearn import metrics
 from scipy.spatial.distance import cdist
 import matplotlib.pyplot as plt
 from sklearn.datasets import load_wine
+from sklearn.metrics import silhouette_score
 
 def plot_elbow(X):
     distortions = []
@@ -17,7 +18,7 @@ def plot_elbow(X):
     plt.plot(K, distortions, 'bx-')
     plt.xlabel('k')
     plt.ylabel('Distortion')
-    plt.title('The Elbow Method showing the optimal k')
+    plt.title('KMeans Elbow on Wine Quality Data')
     plt.show()
 
 
@@ -30,22 +31,15 @@ plot_elbow(X)
 
 #pick three clusters, and view a few groupings
 
-km = KMeans(n_clusters=3,random_state=0).fit(X)
+km = KMeans(n_clusters=2,random_state=10).fit(X)
 
-cent0 = km.cluster_centers_[0]
-cent1 = km.cluster_centers_[1]
-cent2 = km.cluster_centers_[2]
+labels = km.predict(X)
 
-centGroups = [[],[],[]]
+print silhouette_score(X,labels)
 
+#show some results of each cluster
+print "cluster 1"
+print X[np.where(labels == 1)][:5]
 
-for pt in X:
-    #print pt
-    distances = []
-    distances.append(np.linalg.norm(cent0-pt))
-    distances.append(np.linalg.norm(cent1-pt))
-    distances.append(np.linalg.norm(cent2-pt))
-    closest = np.argmin(np.array(distances))
-    centGroups[closest].append(pt)
-
-#print centGroups[2]
+print "cluster 2"
+print X[np.where(labels == 0)][:5]
