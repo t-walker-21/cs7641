@@ -6,7 +6,7 @@ from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import chi2
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
-
+from sklearn.datasets import load_wine
 
 def plot_elbow(X):
     distortions = []
@@ -25,17 +25,10 @@ def plot_elbow(X):
 
 
 
-fin = open("../data1.txt","r")
 
 
-X = []
-y = []
-
-for l in fin:
-    X.append(l.split(",")[:-2])
-    y.append(int(l.split(",")[-2]))
-
-X = np.array(X,dtype=np.float32)
+X = load_wine().data
+y = load_wine().target
 
 scaler = MinMaxScaler()
 scaler.fit(X)

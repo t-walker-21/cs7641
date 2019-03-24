@@ -5,7 +5,7 @@ from scipy.spatial.distance import cdist
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
-
+from sklearn.datasets import load_wine
 
 def plot_elbow(X):
     distortions = []
@@ -24,17 +24,9 @@ def plot_elbow(X):
 
 
 
-fin = open("../data1.txt","r")
 
-
-X = []
-y = []
-
-for l in fin:
-    X.append(l.split(",")[:-2])
-    y.append(int(l.split(",")[-2]))
-
-X = np.array(X,dtype=np.float32)
+X = load_wine().data
+y = load_wine().target
 
 scaler = StandardScaler()
 scaler.fit(X)

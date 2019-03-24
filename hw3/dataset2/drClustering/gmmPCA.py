@@ -4,6 +4,7 @@ import itertools
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import load_wine
 
 def plot_bic(X):
 
@@ -47,19 +48,11 @@ def plot_bic(X):
     plt.show()
 
 
-fin = open("../data1.txt","r")
 
 
-X = []
-y = []
+X = load_wine().data
+y = load_wine().target
 
-for l in fin:
-    X.append(l.split(",")[:-2])
-    y.append(int(l.split(",")[-2]))
-
-X = np.array(X,dtype=np.float32)
-
-X = np.array(X,dtype=np.float32)
 scaler = StandardScaler()
 scaler.fit(X)
 
