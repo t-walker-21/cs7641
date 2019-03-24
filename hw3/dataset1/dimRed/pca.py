@@ -1,5 +1,5 @@
 from sklearn.decomposition import PCA
-fin = open("data1.txt","r")
+fin = open("../data1.txt","r")
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler

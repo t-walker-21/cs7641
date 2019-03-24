@@ -2,7 +2,7 @@ from sklearn.decomposition import FastICA as ICA
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 
-fin = open("data1.txt","r")
+fin = open("../data1.txt","r")
 import numpy as np
 
 X = []

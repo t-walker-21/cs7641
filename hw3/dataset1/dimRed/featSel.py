@@ -1,6 +1,7 @@
-from sklearn import random_projection
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import chi2
 import numpy as np
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
 
 fin = open("../data1.txt","r")
@@ -13,15 +14,12 @@ for l in fin:
     y.append(int(l.split(",")[-2]))
 
 X = np.array(X,dtype=np.float32)
-scaler = StandardScaler()
+scaler = MinMaxScaler()
 scaler.fit(X)
 
-X = scaler.transform(X)
+#X = scaler.transform(X)
 
-print X
-
-transformer = random_projection.GaussianRandomProjection(n_components=2)
-X_new = transformer.fit_transform(X)
+X_new = SelectKBest(chi2,k=2).fit_transform(X,y)
 
 newData = [[],[],[]]
 i = 0
