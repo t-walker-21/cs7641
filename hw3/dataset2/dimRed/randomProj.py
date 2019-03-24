@@ -35,4 +35,7 @@ for i in range(len(newData[1])):
 for i in range(len(newData[2])):
     plt.scatter(newData[2][i][0],newData[2][i][1],marker='+',color='b')
 
+plt.title('Random Reprojections of Wine Quality')
+plt.xlabel('first projection')
+plt.ylabel('second projection')
 plt.show()

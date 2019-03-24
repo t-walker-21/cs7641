@@ -63,11 +63,13 @@ plot_bic(X)
 gmm = mixture.GaussianMixture(n_components=2,covariance_type='tied')
 gmm.fit(X)
 
+labels = gmm.predict(X)
 
-gaussianGroups = [[],[]]
+print silhouette_score(X,labels)
 
-for pt in X:
-    res = gmm.predict(pt.reshape(1,-1))[0]
-    gaussianGroups[res].append(pt)
+#show some results of each cluster
+print "cluster 1"
+print X[np.where(labels == 1)][:5]
 
-print gaussianGroups[1]
+print "cluster 2"
+print X[np.where(labels == 0)][:5]

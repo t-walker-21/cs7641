@@ -12,7 +12,7 @@ scaler = StandardScaler()
 scaler.fit(X)
 
 X = scaler.transform(X)
-pca = PCA(n_components=4)
+pca = PCA(n_components=2)
 pca.fit(X)
 dr_X = pca.transform(X)
 
@@ -34,6 +34,9 @@ for i in range(len(newData[1])):
 for i in range(len(newData[2])):
     plt.scatter(newData[2][i][0],newData[2][i][1],marker='+',color='b')
 
+plt.title('Principal Components of Wine Quality')
+plt.xlabel('first component')
+plt.ylabel('second component')
 plt.show()
 
 print (pca.explained_variance_ratio_)

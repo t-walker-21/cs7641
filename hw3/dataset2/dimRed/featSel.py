@@ -11,7 +11,7 @@ y = load_wine().target
 scaler = MinMaxScaler()
 scaler.fit(X)
 
-#X = scaler.transform(X)
+X = scaler.transform(X)
 
 X_new = SelectKBest(chi2,k=2).fit_transform(X,y)
 
@@ -33,4 +33,7 @@ for i in range(len(newData[1])):
 for i in range(len(newData[2])):
     plt.scatter(newData[2][i][0],newData[2][i][1],marker='+',color='b')
 
+plt.title('Select K best features of Wine Quality')
+plt.xlabel('first projection')
+plt.ylabel('second projection')
 plt.show()

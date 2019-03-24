@@ -41,4 +41,7 @@ for i in range(len(newData[1])):
 for i in range(len(newData[2])):
     plt.scatter(newData[2][i][0],newData[2][i][1],marker='+',color='b')
 
+plt.title('Independent Components of Grad Admissions')
+plt.xlabel('first component')
+plt.ylabel('second component')
 plt.show()

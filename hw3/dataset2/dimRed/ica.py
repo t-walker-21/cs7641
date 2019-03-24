@@ -25,7 +25,7 @@ for pt in X:
     i += 1
 
 
-print np.array(newData[0]).shape
+
 for i in range(len(newData[0])):
     plt.scatter(newData[0][i][0],newData[0][i][1],marker='+',color='r')
     
@@ -35,4 +35,7 @@ for i in range(len(newData[1])):
 for i in range(len(newData[2])):
     plt.scatter(newData[2][i][0],newData[2][i][1],marker='+',color='b')
 
+plt.title('Independent Components of Wine Quality')
+plt.xlabel('first component')
+plt.ylabel('second component')
 plt.show()
