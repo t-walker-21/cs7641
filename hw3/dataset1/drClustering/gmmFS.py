@@ -2,6 +2,9 @@ from sklearn import mixture
 import numpy as np
 import itertools
 import matplotlib.pyplot as plt
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import chi2
+from sklearn.preprocessing import MinMaxScaler
 
 def plot_bic(X):
 
@@ -45,7 +48,7 @@ def plot_bic(X):
     plt.show()
 
 
-fin = open("data1.txt","r")
+fin = open("../data1.txt","r")
 
 
 X = []
@@ -56,8 +59,14 @@ for l in fin:
     y.append(int(l.split(",")[-2]))
 
 X = np.array(X,dtype=np.float32)
+scaler = MinMaxScaler()
+scaler.fit(X)
 
-#plot_bic(X)
+#X = scaler.transform(X)
+
+X_new = SelectKBest(chi2,k=2).fit_transform(X,y)
+
+plot_bic(X_new)
 
 gmm = mixture.GaussianMixture(n_components=2,covariance_type='tied')
 gmm.fit(X)

@@ -45,7 +45,7 @@ def plot_bic(X):
     plt.show()
 
 
-fin = open("data1.txt","r")
+fin = open("../data1.txt","r")
 
 
 X = []
@@ -57,7 +57,7 @@ for l in fin:
 
 X = np.array(X,dtype=np.float32)
 
-#plot_bic(X)
+plot_bic(X)
 
 gmm = mixture.GaussianMixture(n_components=2,covariance_type='tied')
 gmm.fit(X)

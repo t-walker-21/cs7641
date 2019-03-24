@@ -2,6 +2,8 @@ from sklearn import mixture
 import numpy as np
 import itertools
 import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
 
 def plot_bic(X):
 
@@ -56,6 +58,15 @@ for l in fin:
     y.append(int(l.split(",")[-2]))
 
 X = np.array(X,dtype=np.float32)
+
+X = np.array(X,dtype=np.float32)
+scaler = StandardScaler()
+scaler.fit(X)
+
+X = scaler.transform(X)
+pca = PCA(n_components=2)
+pca.fit(X)
+dr_X = pca.transform(X)
 
 plot_bic(X)
 

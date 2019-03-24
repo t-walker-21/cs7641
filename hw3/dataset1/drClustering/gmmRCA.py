@@ -2,6 +2,8 @@ from sklearn import mixture
 import numpy as np
 import itertools
 import matplotlib.pyplot as plt
+from sklearn import random_projection
+from sklearn.preprocessing import StandardScaler
 
 def plot_bic(X):
 
@@ -45,7 +47,7 @@ def plot_bic(X):
     plt.show()
 
 
-fin = open("data1.txt","r")
+fin = open("../data1.txt","r")
 
 
 X = []
@@ -56,17 +58,17 @@ for l in fin:
     y.append(int(l.split(",")[-2]))
 
 X = np.array(X,dtype=np.float32)
+X = np.array(X,dtype=np.float32)
+scaler = StandardScaler()
+scaler.fit(X)
 
-#plot_bic(X)
+X = scaler.transform(X)
+
+
+transformer = random_projection.GaussianRandomProjection(n_components=2)
+X_new = transformer.fit_transform(X)
+plot_bic(X_new)
 
 gmm = mixture.GaussianMixture(n_components=2,covariance_type='tied')
 gmm.fit(X)
 
-
-gaussianGroups = [[],[]]
-
-for pt in X:
-    res = gmm.predict(pt.reshape(1,-1))[0]
-    gaussianGroups[res].append(pt)
-
-print gaussianGroups[1]
