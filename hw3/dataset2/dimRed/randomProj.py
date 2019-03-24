@@ -2,17 +2,11 @@ from sklearn import random_projection
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
+from sklearn.datasets import load_wine
 
-fin = open("../data1.txt","r")
+X = load_wine().data
+y = load_wine().target
 
-X = []
-y = []
-
-for l in fin:
-    X.append(l.split(",")[:-2])
-    y.append(int(l.split(",")[-2]))
-
-X = np.array(X,dtype=np.float32)
 scaler = StandardScaler()
 scaler.fit(X)
 

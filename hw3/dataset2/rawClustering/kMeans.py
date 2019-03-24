@@ -3,7 +3,7 @@ import numpy as np
 from sklearn import metrics
 from scipy.spatial.distance import cdist
 import matplotlib.pyplot as plt
-
+from sklearn.datasets import load_wine
 
 def plot_elbow(X):
     distortions = []
@@ -21,21 +21,12 @@ def plot_elbow(X):
     plt.show()
 
 
+X = load_wine().data
 
-fin = open("data1.txt","r")
-
-
-X = []
-y = []
-
-for l in fin:
-    X.append(l.split(",")[:-2])
-    y.append(int(l.split(",")[-2]))
-
-X = np.array(X,dtype=np.float32)
+#print len(X[0])
 
 #obtain elbow plot
-#plot_elbow(X)
+plot_elbow(X)
 
 #pick three clusters, and view a few groupings
 
@@ -57,4 +48,4 @@ for pt in X:
     closest = np.argmin(np.array(distances))
     centGroups[closest].append(pt)
 
-print centGroups[2]
+#print centGroups[2]

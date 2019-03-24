@@ -1,18 +1,12 @@
 from sklearn.decomposition import FastICA as ICA
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
-
-fin = open("../data1.txt","r")
+from sklearn.datasets import load_wine
 import numpy as np
 
-X = []
-y = []
+X = load_wine().data
+y = load_wine().target
 
-for l in fin:
-    X.append(l.split(",")[:-2])
-    y.append(int(l.split(",")[-2]))
-
-X = np.array(X,dtype=np.float32)
 scaler = StandardScaler()
 scaler.fit(X)
 

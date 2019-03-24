@@ -1,22 +1,18 @@
 from sklearn.decomposition import PCA
-fin = open("../data1.txt","r")
+from sklearn.datasets import load_wine
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 
-X = []
-y = []
 
-for l in fin:
-    X.append(l.split(",")[:-2])
-    y.append(int(l.split(",")[-2]))
+X = load_wine().data
+y = load_wine().target
 
-X = np.array(X,dtype=np.float32)
 scaler = StandardScaler()
 scaler.fit(X)
 
 X = scaler.transform(X)
-pca = PCA(n_components=2)
+pca = PCA(n_components=4)
 pca.fit(X)
 dr_X = pca.transform(X)
 
