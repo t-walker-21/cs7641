@@ -4,6 +4,7 @@ import itertools
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import silhouette_score
 
 def plot_bic(X):
 

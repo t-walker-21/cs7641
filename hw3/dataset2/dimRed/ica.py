@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.datasets import load_wine
 import numpy as np
 
+
 X = load_wine().data
 y = load_wine().target
 

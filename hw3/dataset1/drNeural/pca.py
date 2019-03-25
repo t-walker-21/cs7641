@@ -56,7 +56,7 @@ history = cls.fit(dr_X,y,epochs=EPOCHS,steps_per_epoch=10,validation_split=0.2,v
 
 plt.plot(history.history['loss'])
 plt.plot(history.history['val_loss'])
-plt.title('model loss')
+plt.title('pca model loss')
 plt.ylabel('loss')
 plt.xlabel('epoch')
 plt.legend(['test', 'train'], loc='upper left')
